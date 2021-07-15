@@ -571,6 +571,15 @@ extern rfbBool SendPointerEvent(rfbClient* client,int x, int y, int buttonMask);
  */
 extern rfbBool SendKeyEvent(rfbClient* client,uint32_t key, rfbBool down);
 /**
+ * Sends a custom event to the server. If your application is not merely a VNC
+ * viewer (i.e. it controls the server), you'll want to send the keys that the
+ * user presses to the server. Use this function to do that.
+ * @param client The client through which to send the key event
+ * @param cmd A byte reserved to send command
+ * @return true if the key event was send successfully, false otherwise
+ */
+extern rfbBool SendCustomEvent(rfbClient* client, uint8_t cmd);
+/**
  * The same as SendKeyEvent, except a key code will be sent along with the
  * symbol if the server supports extended key events.
  * @param client The client through which to send the key event

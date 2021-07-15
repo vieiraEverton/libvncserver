@@ -1588,6 +1588,23 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
 
+/*
+ * SendCustomEvent.
+ */
+
+rfbBool
+SendCustomEvent(rfbClient* client, uint8_t cmd)
+{
+    rfbCustomEventMsg ce;
+
+    if (!SupportsClient2Server(client, rfbKeyEvent)) return TRUE;
+
+    memset(&ce, 0, sizeof(ce));
+    ce.type = rfbCustomEvent;
+    ce.cmd = cmd;
+    return WriteToRFBServer(client, (char *)&ce, sz_rfbCustomEventMsg);
+}
+
 
 /*
  * SendExtendedKeyEvent.

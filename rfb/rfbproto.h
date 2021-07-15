@@ -424,6 +424,8 @@ typedef struct {
 #define rfbPalmVNCSetScaleFactor 0xF
 /* Xvp message - bidirectional */
 #define rfbXvp 250
+/* Custom Event */
+#define rfbCustomEvent 51
 /* SetDesktopSize client -> server message */
 #define rfbSetDesktopSize 251
 #define rfbQemuEvent 255
@@ -605,7 +607,7 @@ typedef struct {
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  * KeyboardLedState Encoding.  The X coordinate contains the Locked Modifiers
- * so that a remote troubleshooter can identify that the users 'Caps Lock' 
+ * so that a remote troubleshooter can identify that the users 'Caps Lock'
  * is set...   (It helps a *lot* when the users are untrained)
  */
 #define rfbKeyboardMaskShift        1
@@ -809,7 +811,7 @@ typedef struct {
  *-- The "gradient" filter pre-processes pixel data with a simple algorithm
  * which converts each color component to a difference between a "predicted"
  * intensity and the actual intensity. Such a technique does not affect
- * uncompressed data size, but helps to compress photo-like images better. 
+ * uncompressed data size, but helps to compress photo-like images better.
  * Pseudo-code for converting intensities to differences is the following:
  *
  *   P[i,j] := V[i-1,j] + V[i,j-1] - V[i-1,j-1];
@@ -1061,8 +1063,8 @@ typedef struct _rfbFileTransferMsg {
 #define rfbAFileDelete			7 /*  Response to a delete file command  */
 #define rfbAFileRename			8 /*  Response to a rename file command  */
 #define rfbADirRename			9 /*  Response to a rename dir command  */
-#define rfbADirRecursiveListItem	10 
-#define rfbADirRecursiveSize		11 
+#define rfbADirRecursiveListItem	10
+#define rfbADirRecursiveSize		11
 
 								/*  rfbCommand Command - content params */
 #define rfbCDirCreate			1 /*  Request the server to create the given directory */
@@ -1078,9 +1080,9 @@ typedef struct _rfbFileTransferMsg {
 
 #define sz_rfbBlockSize			8192  /*  Size of a File Transfer packet (before compression) */
 #define rfbZipDirectoryPrefix   "!UVNCDIR-\0" /*  Transferred directory are zipped in a file with this prefix. Must end with "-" */
-#define sz_rfbZipDirectoryPrefix 9 
+#define sz_rfbZipDirectoryPrefix 9
 #define rfbDirPrefix			"[ "
-#define rfbDirSuffix			" ]"		
+#define rfbDirSuffix			" ]"
 
 
 
@@ -1101,9 +1103,9 @@ typedef struct _rfbTextChatMsg {
 #define sz_rfbTextChatMsg 8
 
 #define rfbTextMaxSize		4096
-#define rfbTextChatOpen		0xFFFFFFFF 
-#define rfbTextChatClose	0xFFFFFFFE  
-#define rfbTextChatFinished 0xFFFFFFFD  
+#define rfbTextChatOpen		0xFFFFFFFF
+#define rfbTextChatClose	0xFFFFFFFE
+#define rfbTextChatFinished 0xFFFFFFFD
 
 
 /*-----------------------------------------------------------------------------
@@ -1205,7 +1207,7 @@ typedef struct rfbSetDesktopSizeMsg {
 
 /*-----------------------------------------------------------------------------
  * Modif sf@2002
- * ResizeFrameBuffer - The Client must change the size of its framebuffer  
+ * ResizeFrameBuffer - The Client must change the size of its framebuffer
  */
 
 typedef struct _rfbResizeFrameBufferMsg {
@@ -1394,6 +1396,13 @@ typedef struct {
 
 #define sz_rfbKeyEventMsg 8
 
+typedef struct {
+    uint8_t type;			/* always rfbCustomEvent */
+    uint8_t cmd;			/* Command Code */
+    uint16_t pad;
+} rfbCustomEventMsg;
+
+#define sz_rfbCustomEventMsg 4
 
 typedef struct {
     uint8_t type;     /* always rfbQemuEvent */
@@ -1538,7 +1547,7 @@ typedef union {
 	rfbSetDesktopSizeMsg sdm;
 } rfbClientToServerMsg;
 
-/* 
+/*
  * vncauth.h - describes the functions provided by the vncauth library.
  */
 
