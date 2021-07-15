@@ -579,8 +579,8 @@ typedef struct {
  */
 
 typedef struct {
-  uint8_t client2server[32]; /* maximum of 256 message types (256/8)=32 */
-  uint8_t server2client[32]; /* maximum of 256 message types (256/8)=32 */
+    uint8_t client2server[32]; /* maximum of 256 message types (256/8)=32 */
+    uint8_t server2client[32]; /* maximum of 256 message types (256/8)=32 */
 } rfbSupportedMessages;
 
 #define sz_rfbSupportedMessages 64
@@ -1034,7 +1034,7 @@ typedef struct _rfbFileTransferMsg {
 /*  FileTransfer Content types and Params defines */
 #define rfbDirContentRequest	1 /*  Client asks for the content of a given Server directory */
 #define rfbDirPacket			2 /*  Full directory name or full file name. */
-								  /*  Null content means end of Directory */
+/*  Null content means end of Directory */
 #define rfbFileTransferRequest	3 /*  Client asks the server for the transfer of a given file */
 #define rfbFileHeader			4 /*  First packet of a file transfer, containing file's features */
 #define rfbFilePacket			5 /*  One chunk of the file */
@@ -1047,13 +1047,13 @@ typedef struct _rfbFileTransferMsg {
 #define rfbFileChecksums		12 /*  The zipped checksums of the destination file (Delta Transfer) */
 #define rfbFileTransferAccess	14 /*  Request FileTransfer authorization */
 
-								/*  rfbDirContentRequest client Request - content params  */
+/*  rfbDirContentRequest client Request - content params  */
 #define rfbRDirContent			1 /*  Request a Server Directory contents */
 #define rfbRDrivesList			2 /*  Request the server's drives list */
 #define rfbRDirRecursiveList	3 /*  Request a server directory content recursive sorted list */
 #define rfbRDirRecursiveSize	4 /*  Request a server directory content recursive size */
 
-								/*  rfbDirPacket & rfbCommandReturn  server Answer - content params */
+/*  rfbDirPacket & rfbCommandReturn  server Answer - content params */
 #define rfbADirectory			1 /*  Reception of a directory name */
 #define rfbAFile				2 /*  Reception of a file name  */
 #define rfbADrivesList			3 /*  Reception of a list of drives */
@@ -1066,7 +1066,7 @@ typedef struct _rfbFileTransferMsg {
 #define rfbADirRecursiveListItem	10
 #define rfbADirRecursiveSize		11
 
-								/*  rfbCommand Command - content params */
+/*  rfbCommand Command - content params */
 #define rfbCDirCreate			1 /*  Request the server to create the given directory */
 #define rfbCDirDelete			2 /*  Request the server to delete the given directory */
 #define rfbCFileCreate			3 /*  Request the server to create the given file */
@@ -1074,7 +1074,7 @@ typedef struct _rfbFileTransferMsg {
 #define rfbCFileRename			5 /*  Request the server to rename the given file  */
 #define rfbCDirRename			6 /*  Request the server to rename the given directory */
 
-								/*  Errors - content params or "size" field */
+/*  Errors - content params or "size" field */
 #define rfbRErrorUnknownCmd     1  /*  Unknown FileTransfer command. */
 #define rfbRErrorCmd			0xFFFFFFFF/*  Error when a command fails on remote side (ret in "size" field) */
 
@@ -1131,9 +1131,9 @@ typedef struct _rfbTextChatMsg {
 
 typedef struct {
     uint8_t type;			/* always rfbXvp */
-	uint8_t pad;
-	uint8_t version;	/* xvp extension version */
-	uint8_t code;      	/* xvp message code */
+    uint8_t pad;
+    uint8_t version;	/* xvp extension version */
+    uint8_t code;      	/* xvp message code */
 } rfbXvpMsg;
 
 #define sz_rfbXvpMsg (4)
@@ -1212,9 +1212,9 @@ typedef struct rfbSetDesktopSizeMsg {
 
 typedef struct _rfbResizeFrameBufferMsg {
     uint8_t type;			/* always rfbResizeFrameBuffer */
-	uint8_t pad1;
-	uint16_t framebufferWidth;	/*  FrameBuffer width */
-	uint16_t framebufferHeigth;	/*  FrameBuffer height */
+    uint8_t pad1;
+    uint16_t framebufferWidth;	/*  FrameBuffer width */
+    uint16_t framebufferHeigth;	/*  FrameBuffer height */
 } rfbResizeFrameBufferMsg;
 
 #define sz_rfbResizeFrameBufferMsg 6
@@ -1230,11 +1230,11 @@ typedef struct _rfbResizeFrameBufferMsg {
 
 typedef struct {
     uint8_t type;			/* always rfbReSizeFrameBuffer */
-	uint8_t pad1;
-	uint16_t desktop_w;	/* Desktop width */
-	uint16_t desktop_h;	/* Desktop height */
-	uint16_t buffer_w;	/* FrameBuffer width */
-	uint16_t buffer_h;	/* Framebuffer height */
+    uint8_t pad1;
+    uint16_t desktop_w;	/* Desktop width */
+    uint16_t desktop_h;	/* Desktop height */
+    uint16_t buffer_w;	/* FrameBuffer width */
+    uint16_t buffer_h;	/* Framebuffer height */
     uint16_t pad2;
 
 } rfbPalmVNCReSizeFrameBufferMsg;
@@ -1254,20 +1254,20 @@ typedef union {
     rfbSetColourMapEntriesMsg scme;
     rfbBellMsg b;
     rfbServerCutTextMsg sct;
-	rfbResizeFrameBufferMsg rsfb;
-	rfbPalmVNCReSizeFrameBufferMsg prsfb; 
-	rfbFileTransferMsg ft;
-	rfbTextChatMsg tc;
-	rfbXvpMsg xvp;
-	rfbExtDesktopSizeMsg eds;
+    rfbResizeFrameBufferMsg rsfb;
+    rfbPalmVNCReSizeFrameBufferMsg prsfb;
+    rfbFileTransferMsg ft;
+    rfbTextChatMsg tc;
+    rfbXvpMsg xvp;
+    rfbExtDesktopSizeMsg eds;
 } rfbServerToClientMsg;
 
 
 
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * RDV Cache Encoding.  
+ * RDV Cache Encoding.
  * special is not used at this point, can be used to reset cache or other specials
- * just put it to make sure we don't have to change the encoding again.  
+ * just put it to make sure we don't have to change the encoding again.
  */
 
 typedef struct {
@@ -1481,7 +1481,7 @@ typedef struct _rfbSetScaleMsg {
 
 /*-----------------------------------------------------------------------------
  * Copyright (C) 2001 Harakan Software
- * PalmVNC 1.4 & 2.? SetScale Factor message 
+ * PalmVNC 1.4 & 2.? SetScale Factor message
  * SetScaleFactor - tell the RFB server to alter the scale factor for the
  * client buffer.
  */
@@ -1515,7 +1515,7 @@ typedef struct _rfbSetServerInputMsg {
 
 typedef struct _rfbSetSWMsg {
     uint8_t type;			/* always rfbSetSW */
-    uint8_t status;		
+    uint8_t status;
     uint16_t x;
     uint16_t y;
 } rfbSetSWMsg;
@@ -1537,14 +1537,14 @@ typedef union {
     rfbKeyEventMsg ke;
     rfbPointerEventMsg pe;
     rfbClientCutTextMsg cct;
-	rfbSetScaleMsg ssc;
-	rfbPalmVNCSetScaleFactorMsg pssf;
-	rfbSetServerInputMsg sim;
-	rfbFileTransferMsg ft;
-	rfbSetSWMsg sw;
-	rfbTextChatMsg tc;
-	rfbXvpMsg xvp;
-	rfbSetDesktopSizeMsg sdm;
+    rfbSetScaleMsg ssc;
+    rfbPalmVNCSetScaleFactorMsg pssf;
+    rfbSetServerInputMsg sim;
+    rfbFileTransferMsg ft;
+    rfbSetSWMsg sw;
+    rfbTextChatMsg tc;
+    rfbXvpMsg xvp;
+    rfbSetDesktopSizeMsg sdm;
 } rfbClientToServerMsg;
 
 /*
