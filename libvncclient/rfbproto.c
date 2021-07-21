@@ -233,6 +233,8 @@ DefaultSupportedMessages(rfbClient* client)
     SetClient2Server(client, rfbSetEncodings);
     SetClient2Server(client, rfbFramebufferUpdateRequest);
     SetClient2Server(client, rfbKeyEvent);
+    SetClient2Server(client, rfbSetSW);
+    SetClient2Server(client, rfbCustomEvent);
     SetClient2Server(client, rfbPointerEvent);
     SetClient2Server(client, rfbClientCutText);
     /* technically, we only care what we can *send* to the server
@@ -1589,6 +1591,25 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
 }
 
 /*
+ * SendSwEvent.
+ */
+
+rfbBool
+SendSwEvent(rfbClient* client, uint16_t x, uint16_t y)
+{
+    rfbSetSWMsg sw;
+
+    if (!SupportsClient2Server(client, rfbSetSW)) return TRUE;
+
+    memset(&sw, 0, sizeof(sw));
+    sw.type = rfbSetSW;
+    sw.x = rfbClientSwap16IfLE(x);
+    sw.y = rfbClientSwap16IfLE(y);
+    return WriteToRFBServer(client, (char *)&sw, sz_rfbSetSWMsg);
+}
+
+
+/*
  * SendCustomEvent.
  */
 
@@ -1597,7 +1618,7 @@ SendCustomEvent(rfbClient* client, uint8_t cmd)
 {
     rfbCustomEventMsg ce;
 
-    if (!SupportsClient2Server(client, rfbKeyEvent)) return TRUE;
+    if (!SupportsClient2Server(client, rfbCustomEvent)) return TRUE;
 
     memset(&ce, 0, sizeof(ce));
     ce.type = rfbCustomEvent;
