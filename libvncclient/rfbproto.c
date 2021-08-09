@@ -1588,11 +1588,11 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.down = down ? 1 : 0;
   ke.key = rfbClientSwap32IfLE(key);
   if (key == XK_Caps_Lock) {
-      //      rfbClientLog("A tecla caps lock foi press \n");
-      //      rfbClientLog("valor do estado: %d\n", down);
-      //      rfbClientLog("valor do pad: %d\n", rfbClientSwap16IfLE((down& 1) != 0));
+        rfbClientLog("A tecla caps lock foi press \n");
+        rfbClientLog("valor do estado: %d\n", down);
+        rfbClientLog("valor do pad: %d\n", rfbClientSwap16IfLE((down& 1) != 0));
       //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
-      ke.pad = rfbClientSwap16IfLE((down& 1) != 0);
+        ke.pad = rfbClientSwap16IfLE((down& 1) != 0);
   }
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
