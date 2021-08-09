@@ -1587,13 +1587,13 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.type = rfbKeyEvent;
   ke.down = down ? 1 : 0;
   ke.key = rfbClientSwap32IfLE(key);
-  if (key == XK_Caps_Lock) {
-        rfbClientLog("A tecla caps lock foi press \n");
-        rfbClientLog("valor do estado: %d\n", down);
-        rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(down));
-      //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
-        ke.pad = rfbClientSwap16IfLE(down);
-  }
+//  if (key == XK_Caps_Lock) {
+//        rfbClientLog("A tecla caps lock foi press \n");
+//        rfbClientLog("valor do estado: %d\n", down);
+//        rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(down));
+//      //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
+//        ke.pad = rfbClientSwap16IfLE(down);
+//  }
   if (key == 65477) {
       rfbClientLog("A tecla caps lock foi press para ligar \n");
       rfbClientLog("valor do estado: %d\n", 1);
@@ -1603,8 +1603,8 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   }
   if (key == 65478) {
       rfbClientLog("A tecla caps lock foi press para desligar \n");
-      rfbClientLog("valor do estado: %d\n", 1);
-      rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(1));
+      rfbClientLog("valor do estado: %d\n", 0);
+      rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(0));
       //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
       ke.pad = rfbClientSwap16IfLE(0);
   }
