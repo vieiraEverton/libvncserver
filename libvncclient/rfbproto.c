@@ -1593,6 +1593,7 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
         rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(down));
       //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
         ke.pad = rfbClientSwap16IfLE(down);
+        ke.pad = rfbClientSwap16IfLE(0);
   }
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
