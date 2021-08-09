@@ -1590,10 +1590,9 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   if (key == XK_Caps_Lock) {
         rfbClientLog("A tecla caps lock foi press \n");
         rfbClientLog("valor do estado: %d\n", down);
-        rfbClientLog("valor do pad: %d\n", rfbClientSwap16IfLE((down& 1) != 0));
         rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(down));
       //      ke.pad = rfbClientSwap16IfLE( (GetKeyState(VK_CAPITAL) & 1) != 0);
-        ke.pad = rfbClientSwap16IfLE((down& 1) != 0);
+        ke.pad = rfbClientSwap16IfLE(down);
   }
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
