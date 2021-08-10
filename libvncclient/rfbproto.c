@@ -1587,13 +1587,13 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.type = rfbKeyEvent;
   ke.down = down ? 1 : 0;
   ke.key = rfbClientSwap32IfLE(key);
-  if (key == XK_Caps_Lock && down) {
+  if (key == 65477 && down) {
         rfbClientLog("A tecla caps lock foi press \n");
         rfbClientLog("valor do estado: %d\n", 1);
         rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(1));
         ke.pad = rfbClientSwap16IfLE(1);
   }
-  if (key == XK_Caps_Lock && !down) {
+  if (key == 65478 && down) {
       rfbClientLog("A tecla caps lock foi solta \n");
       rfbClientLog("valor do estado: %d\n", 0);
       rfbClientLog("valor do pad2: %d\n", rfbClientSwap16IfLE(0));
