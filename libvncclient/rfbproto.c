@@ -1596,7 +1596,7 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
 
   if (key == 65477 && down == 0 && capsLock == 0)
       capsLock = 1;
-  if (key == 65478 && down == 0 && capsLock == 0)
+  if (key == 65478 && down == 0 && capsLock == 1)
       capsLock = 0;
 
   if (key == XK_Caps_Lock && down == 0 && capsLock == 0) {
