@@ -73,6 +73,8 @@
 
 rfbBool rfbEnableClientLogging=TRUE;
 
+int capsLock  = 0;
+
 // Everton test
 //int capsLock = 0;
 
