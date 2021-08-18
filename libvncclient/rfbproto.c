@@ -1600,7 +1600,7 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
       capsLock = 0;
   }
 
-  if (key == XK_Caps_Lock && down == 1 && capsLock == 0) {
+  if (key == XK_Caps_Lock && down == 0 && capsLock == 0) {
       rfbClientLog("A tecla caps lock foi ativada \n");
       ke.pad = rfbClientSwap16IfLE(1);
       capsLock = 1;
