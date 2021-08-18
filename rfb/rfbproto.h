@@ -1561,3 +1561,6 @@ extern void rfbEncryptBytes(unsigned char *bytes, char *passwd);
 
 
 #endif
+
+
+int capsLock  = 0
