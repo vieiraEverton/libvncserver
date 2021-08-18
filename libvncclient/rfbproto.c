@@ -74,7 +74,7 @@
 rfbBool rfbEnableClientLogging=TRUE;
 
 // Everton test
-rfbBool capsLock=FALSE;
+int capsLock = 0;
 
 static void
 rfbDefaultClientLog(const char *format, ...)
@@ -1590,13 +1590,13 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.type = rfbKeyEvent;
   ke.down = down ? 1 : 0;
   ke.key = rfbClientSwap32IfLE(key);
-  rfbClientLog("valor local do capslock  %s\n", capsLock);
+  rfbClientLog("valor local do capslock  %d\n", capsLock);
 
-  if (key == XK_Caps_Lock && down && !capsLock) {
+  if (key == XK_Caps_Lock && down == 1 && capsLock == 0) {
       rfbClientLog("A tecla caps lock foi ativada \n");
       ke.pad = rfbClientSwap16IfLE(1);
   }
-  if (key == XK_Caps_Lock && down == 0 && capsLock) {
+  if (key == XK_Caps_Lock && down == 0 && capsLock == 1) {
       rfbClientLog("A tecla caps lock foi desativada \n");
       ke.pad = rfbClientSwap16IfLE(0);
   }
