@@ -1590,12 +1590,13 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.type = rfbKeyEvent;
   ke.down = down ? 1 : 0;
   ke.key = rfbClientSwap32IfLE(key);
+  rfbClientLog("valor local do capslock  %s\n", capsLock);
 
   if (key == XK_Caps_Lock && down && !capsLock) {
       rfbClientLog("A tecla caps lock foi ativada \n");
       ke.pad = rfbClientSwap16IfLE(1);
   }
-  if (key == XK_Caps_Lock && !down && capsLock) {
+  if (key == XK_Caps_Lock && down == 0 && capsLock) {
       rfbClientLog("A tecla caps lock foi desativada \n");
       ke.pad = rfbClientSwap16IfLE(0);
   }
