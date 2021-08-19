@@ -1599,14 +1599,19 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   if (key == 65478 && down == 0 && capsLock == 1)
       capsLock = 0;
 
-  if (key == XK_Caps_Lock && down == 0 && capsLock == 0) {
-      rfbClientLog("A tecla caps lock foi ativada \n");
-      ke.pad = rfbClientSwap16IfLE(1);
+  if (key == XK_Caps_Lock) {
+      ke.pad = rfbClientSwap16IfLE( (capsLock & 1) != 0);
+      rfbClientLog("O valor do pad  %d\n", ke.pad);
   }
-  if (key == XK_Caps_Lock && down == 1 && capsLock == 1) {
-      rfbClientLog("A tecla caps lock foi desativada \n");
-      ke.pad = rfbClientSwap16IfLE(0);
-  }
+
+//  if (key == XK_Caps_Lock && down == 0 && capsLock == 0) {
+//      rfbClientLog("A tecla caps lock foi ativada \n");
+//      ke.pad = rfbClientSwap16IfLE(1);
+//  }
+//  if (key == XK_Caps_Lock && down == 1 && capsLock == 1) {
+//      rfbClientLog("A tecla caps lock foi desativada \n");
+//      ke.pad = rfbClientSwap16IfLE(0);
+//  }
 
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
