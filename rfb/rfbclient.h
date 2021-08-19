@@ -471,6 +471,8 @@ typedef struct _rfbClient {
 	 * For internal use only.
 	 */
 	MUTEX(tlsRwMutex);
+
+	rfbBool capsLockState;
 } rfbClient;
 
 /* cursor.c */
