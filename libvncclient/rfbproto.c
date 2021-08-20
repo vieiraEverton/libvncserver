@@ -1605,7 +1605,7 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
 //  }
 
   if (key == XK_Caps_Lock && down) {
-      capsLock = ((capsLock & 1) == 0);
+      client->capsLockState = ((client->capsLockState & 1) == 0);
       ke.pad = rfbClientSwap16IfLE( (capsLock & 1) != 0);
       rfbClientLog("O valor do pad  %d\n", ke.pad);
   }
