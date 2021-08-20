@@ -471,7 +471,7 @@ typedef struct _rfbClient {
 	 * For internal use only.
 	 */
 	MUTEX(tlsRwMutex);
-//    Everton
+    // Everton
 	rfbBool capsLockState;
 } rfbClient;
 

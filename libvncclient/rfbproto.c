@@ -73,10 +73,6 @@
 
 rfbBool rfbEnableClientLogging=TRUE;
 
-int capsLock  = 0;
-
-// Everton test
-//int capsLock = 0;
 
 static void
 rfbDefaultClientLog(const char *format, ...)
@@ -1594,30 +1590,12 @@ SendKeyEvent(rfbClient* client, uint32_t key, rfbBool down)
   ke.key = rfbClientSwap32IfLE(key);
   rfbClientLog("valor local do capslock  %d\n", client->capsLockState);
 
-//  if (key == 65492 && down == 1 && capsLock == 0){
-//      capsLock = 1;
-//      rfbClientLog("caps ativado");
-//  }
-//
-//  if (key == 65492 && down == 0 && capsLock == 1){
-//      capsLock = 0;
-//      rfbClientLog("caps desativado");
-//  }
-
+  // Everton CapsLock
   if (key == XK_Caps_Lock && down) {
       client->capsLockState = ((client->capsLockState & 1) == 0);
       ke.pad = rfbClientSwap16IfLE( (client->capsLockState & 1) != 0);
       rfbClientLog("O valor do pad  %d\n", ke.pad);
   }
-
-//  if (key == XK_Caps_Lock && down == 0 && capsLock == 0) {
-//      rfbClientLog("A tecla caps lock foi ativada \n");
-//      ke.pad = rfbClientSwap16IfLE(1);
-//  }
-//  if (key == XK_Caps_Lock && down == 1 && capsLock == 1) {
-//      rfbClientLog("A tecla caps lock foi desativada \n");
-//      ke.pad = rfbClientSwap16IfLE(0);
-//  }
 
   return WriteToRFBServer(client, (char *)&ke, sz_rfbKeyEventMsg);
 }
