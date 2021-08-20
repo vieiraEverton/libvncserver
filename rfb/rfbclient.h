@@ -472,7 +472,7 @@ typedef struct _rfbClient {
 	 */
 	MUTEX(tlsRwMutex);
 //    Everton
-	rfbBool capsLockState = FALSE;
+	rfbBool capsLockState;
 } rfbClient;
 
 /* cursor.c */
