@@ -1633,6 +1633,7 @@ SendCustomEvent(rfbClient* client, uint8_t cmd)
     memset(&ce, 0, sizeof(ce));
     ce.type = rfbCustomEvent;
     ce.cmd = cmd;
+    rfbClientLog("Send custom command with value:  %d\n", cmd);
     return WriteToRFBServer(client, (char *)&ce, sz_rfbCustomEventMsg);
 }
 
