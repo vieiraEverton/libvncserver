@@ -473,6 +473,9 @@ typedef struct _rfbClient {
 	 */
 	MUTEX(tlsRwMutex);
 
+    // ultrasound
+	rfbBool capsLockState;
+
 	rfbBool requestedResize;
         /**
          * Used for intended dimensions, rfbClient.width and rfbClient.height are used to manage the real framebuffer dimensions.
@@ -489,8 +492,6 @@ typedef struct _rfbClient {
 
         /* flag to indicate wheter updateRect is managed by lib or user */
         rfbBool isUpdateRectManagedByLib;
-    // Everton
-	rfbBool capsLockState;
 } rfbClient;
 
 /* cursor.c */
