@@ -472,7 +472,8 @@ typedef struct _rfbClient {
 	 * For internal use only.
 	 */
 	MUTEX(tlsRwMutex);
-    // Everton
+
+	// ultrasound
 	rfbBool capsLockState;
 
 	rfbBool requestedResize;
